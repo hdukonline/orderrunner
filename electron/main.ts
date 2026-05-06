@@ -5,6 +5,15 @@ import fs from "fs";
 const { clearScreenshots } = require('../ui/core/utils/screenshots');
 import { autoUpdater } from "electron-updater";
 
+
+function sendLog(message: string) {
+  const windows = BrowserWindow.getAllWindows();
+
+  for (const win of windows) {
+    win.webContents.send("test-log", message);
+  }
+}
+
 /**
  * ----------------------------
  * DPI Fix for Windows
@@ -171,22 +180,22 @@ app.on("window-all-closed", () => {
 });
 
 autoUpdater.on("checking-for-update", () => {
-  console.log("Checking for updates...");
+  sendLog("Checking for updates...");
 });
 
 autoUpdater.on("update-available", () => {
-  console.log("Update available");
+  sendLog("Update available");
 });
 
 autoUpdater.on("update-not-available", () => {
-  console.log("No updates available");
+  sendLog("No updates available");
 });
 
 autoUpdater.on("error", (err) => {
-  console.error("Update error:", err);
+  sendLog(`Update error: ${err.message}`);
 });
 
 autoUpdater.on("update-downloaded", () => {
-  console.log("Update downloaded. Installing...");
+  sendLog("Update downloaded. Installing...");
   autoUpdater.quitAndInstall();
 });
