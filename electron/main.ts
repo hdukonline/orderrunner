@@ -147,6 +147,7 @@ function createWindow() {
 
   // Optional: open DevTools for debugging
   // win.webContents.openDevTools();
+  return win;
 }
 
 /**
@@ -168,12 +169,14 @@ app.on('browser-window-created', (_e, window) => {
  * App lifecycle
  * ----------------------------
  */
-
 app.whenReady().then(() => {
-  createWindow();
+  const win = createWindow();
 
-  autoUpdater.checkForUpdatesAndNotify();
+  win.webContents.on("did-finish-load", () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
 });
+
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
