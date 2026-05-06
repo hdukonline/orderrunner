@@ -1,0 +1,513 @@
+<!-- Header -->
+<header
+  class="bg-[#131313] text-[#C3C0FF] sticky top-0 flex justify-between items-center w-full px-6 py-4 z-50"
+>
+  <h1 class="font-headline text-2xl font-bold tracking-tight text-on-surface">
+    Runner Configuration
+  </h1>
+</header>
+
+<main
+  class="flex-grow flex flex-col gap-8 p-6 md:px-8 md:pt-4 max-w-5xl mx-auto w-full"
+>
+  <section
+    class="w-full bg-surface-container-low rounded-xl p-8 shadow-2xl relative overflow-hidden"
+  >
+    <div class="absolute top-0 left-0 w-1 h-full"></div>
+    <div class="flex flex-col gap-8">
+      <header>
+        <p class="text-on-surface-variant text-sm mt-1">
+          Define automation parameters for the current run. These settings will
+          be used to populate environment variables during run execution.
+        </p>
+      </header>
+      <!-- Inputs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Site -->
+        <div class="flex flex-col gap-2">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Choose Site
+          </label>
+
+          <select
+            id="site"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          >
+            <option value="">--- Please Choose ---</option>
+          </select>
+        </div>
+
+        <!-- ENVIRONMENT -->
+        <div class="flex flex-col gap-2">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Environment
+          </label>
+
+          <select
+            id="env"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          >
+            <option value="">--- Please Choose ---</option>
+          </select>
+        </div>
+
+        <!-- ENVIRONMENT INFO -->
+        <div id="env-info" class="col-span-1 md:col-span-2 hidden">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Environment Details
+          </label>
+
+          <pre
+            id="env-json"
+            class="bg-surface-container-highest text-on-surface rounded-lg text-sm overflow-auto"
+          ></pre>
+        </div>
+
+        <!-- Test -->
+        <div id="test-container" class="flex flex-col gap-2">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Choose Test
+          </label>
+
+          <select
+            id="test"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          >
+            <option value="">--- Please Choose ---</option>
+            <option
+              data-site="arena"
+              data-capability="order"
+              value="orderCreate"
+            >
+              Generate Order
+            </option>
+            <option data-site="portal" value="login">Portal Sample Test</option>
+          </select>
+        </div>
+
+        <!-- Browser -->
+        <div class="flex flex-col gap-2">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Choose Browser
+          </label>
+
+          <select
+            id="browser"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          >
+            <option value="">--- Please Choose ---</option>
+            <option value="chromium">Chromium</option>
+            <option value="firefox">Firefox</option>
+            <option value="webkit">WebKit</option>
+          </select>
+        </div>
+
+        <!-- Product Category -->
+        <div id="product-category-wrapper" class="flex flex-col gap-2 hidden">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Choose Product Category
+          </label>
+
+          <select
+            id="product-category"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          >
+            <option value="">--- Please Choose ---</option>
+            <option value="curtains">Curtains</option>
+            <option value="outdoor">Outdoor Products</option>
+            <option value="shutters">Perfect Fit Shutters</option>
+            <option value="pleated">Pleated Blinds</option>
+            <option value="rollers">Roller Blinds</option>
+            <option value="romans">Roman Blinds</option>
+            <option value="venetians">Venetains</option>
+            <option value="verticals">Vertical Blinds</option>
+          </select>
+        </div>
+
+        <!-- Product Type (hidden by default) -->
+        <div id="product-type-wrapper" class="flex flex-col gap-2 hidden">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Choose Product Type
+          </label>
+
+          <select
+            id="product-type"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          >
+            <option value="">--- Please Choose ---</option>
+          </select>
+        </div>
+
+        <!-- Runs -->
+        <div class="flex flex-col gap-2">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Number of Runs
+          </label>
+
+          <input
+            id="runs"
+            type="number"
+            min="1"
+            value="1"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          />
+        </div>
+
+        <!-- Product Type -->
+        <!-- <div class="flex flex-col gap-2">
+          <label
+            class="font-headline text-xs font-semibold uppercase tracking-wider text-outline-variant"
+          >
+            Product Type
+          </label>
+
+          <select
+            id="product-type"
+            class="bg-surface-container-highest border-none text-on-surface rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primaryRing focus:ring-offset-2 focus:ring-offset-surface transition-all"
+          >
+            <option value="">--- Please Choose ---</option>
+            <option data-site="arena" value="ROB">Rollers Blinds</option>
+            <option data-site="portal" value="CRT">Curtains</option>
+            <option data-site="portal" value="TBK">Tiebacks</option>
+          </select>
+        </div> -->
+      </div>
+
+      <!-- Advanced Options (collapsible) -->
+      <details
+        open
+        class="group w-full border-t border-outline-variant/10 pt-4"
+      >
+        <summary
+          class="flex items-center justify-between cursor-pointer list-none text-on-surface-variant hover:text-on-surface transition-colors py-2"
+        >
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-lg">tune</span>
+            <span
+              class="font-headline text-sm font-semibold uppercase tracking-wider"
+            >
+              Advanced Options
+            </span>
+          </div>
+          <span
+            class="material-symbols-outlined expand-icon transition-transform duration-300"
+          >
+            expand_more
+          </span>
+        </summary>
+
+        <!-- OPTIONS WRAPPER -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6 mt-2 pl-6">
+          <!-- ===================== -->
+          <!-- Execution -->
+          <!-- ===================== -->
+          <div class="col-span-full">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Execution
+            </span>
+            <div class="mt-2 border-b border-outline-variant/10"></div>
+          </div>
+
+          <!-- Headless -->
+          <label class="flex items-center gap-3 cursor-pointer group/toggle">
+            <div class="relative">
+              <input
+                id="headless"
+                checked
+                class="peer sr-only"
+                type="checkbox"
+              />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Headless
+            </span>
+          </label>
+
+          <!-- Slow Mode -->
+          <label class="flex items-center gap-3 cursor-pointer group/toggle">
+            <div class="relative">
+              <input
+                checked
+                id="test-slow"
+                class="peer sr-only"
+                type="checkbox"
+              />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Slow Mode
+            </span>
+          </label>
+
+          <!-- ===================== -->
+          <!-- Order Lifecycle -->
+          <!-- ===================== -->
+
+          <!-- Header (part of the group) -->
+          <div
+            class="col-span-full mt-4 order-lifecycle-group"
+            data-domain="order"
+          >
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Order Lifecycle
+            </span>
+            <div class="mt-2 border-b border-outline-variant/10"></div>
+          </div>
+
+          <!-- Submit Order -->
+          <label
+            class="flex items-center gap-3 cursor-pointer group/toggle order-lifecycle-group"
+            data-option="submit-order"
+          >
+            <div class="relative">
+              <input id="submit-order" class="peer sr-only" type="checkbox" />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Submit Order
+            </span>
+          </label>
+
+          <!-- Save Order Only -->
+          <label
+            class="flex items-center gap-3 cursor-pointer group/toggle order-lifecycle-group"
+            data-option="save-only"
+          >
+            <div class="relative">
+              <input id="save-only" class="peer sr-only" type="checkbox" />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Save Order Only
+            </span>
+          </label>
+
+          <!-- Return iDoc -->
+          <label
+            class="flex items-center gap-3 cursor-pointer group/toggle order-lifecycle-group"
+            data-option="return-idoc"
+          >
+            <div class="relative">
+              <input id="return-idoc" class="peer sr-only" type="checkbox" />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Return iDoc
+            </span>
+          </label>
+
+          <!-- ===================== -->
+          <!-- Screenshots -->
+          <!-- ===================== -->
+          <div
+            class="col-span-full mt-4 order-lifecycle-group"
+            data-domain="order"
+          >
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Screenshots
+            </span>
+            <div class="mt-2 border-b border-outline-variant/10"></div>
+          </div>
+
+          <!-- Configure Page Screenshot -->
+          <label
+            class="flex items-center gap-3 cursor-pointer group/toggle order-lifecycle-group"
+          >
+            <div class="relative">
+              <input id="ss-configure" class="peer sr-only" type="checkbox" />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Configure Page
+            </span>
+          </label>
+
+          <!-- Basket Page Screenshot -->
+          <label
+            class="flex items-center gap-3 cursor-pointer group/toggle order-lifecycle-group"
+          >
+            <div class="relative">
+              <input id="ss-basket" class="peer sr-only" type="checkbox" />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Basket Page
+            </span>
+          </label>
+
+          <!-- Order Confirmation Screenshot (conditional) -->
+          <label
+            class="flex items-center gap-3 cursor-pointer group/toggle order-lifecycle-group"
+            title="Only available when Submit Order is enabled"
+          >
+            <div class="relative">
+              <input
+                id="ss-confirmation"
+                class="peer sr-only"
+                type="checkbox"
+                disabled
+              />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors peer-disabled:opacity-40"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors peer-disabled:opacity-40"
+            >
+              Order Confirmation Page
+            </span>
+          </label>
+
+          <!-- Unsubmitted Order Screenshot (conditional)-->
+          <label
+            class="flex items-center gap-3 cursor-pointer group/toggle order-lifecycle-group"
+          >
+            <div class="relative">
+              <input id="ss-unsubmitted" class="peer sr-only" type="checkbox" />
+              <div
+                class="w-10 h-5 bg-surface-container-highest rounded-full peer-checked:bg-primary-container transition-colors"
+              ></div>
+              <div
+                class="absolute left-1 top-1 w-3 h-3 bg-on-surface-variant rounded-full peer-checked:translate-x-5 peer-checked:bg-white transition-transform"
+              ></div>
+            </div>
+            <span
+              class="text-sm font-medium text-on-surface group-hover/toggle:text-primary transition-colors"
+            >
+              Unsubmitted Orders Page
+            </span>
+          </label>
+        </div>
+      </details>
+
+      <!-- Run / Cancel Buttons -->
+      <div class="flex gap-4">
+        <button
+          id="runBtn"
+          disabled
+          class="flex-1 px-6 py-3 rounded-lg font-headline font-bold bg-surface-container-highest text-on-surface hover:bg-primary-container transition disabled:opacity-40"
+        >
+          Run
+        </button>
+
+        <button
+          id="cancelBtn"
+          disabled
+          class="flex-1 px-6 py-3 rounded-lg font-headline font-bold bg-surface-container-highest text-on-surface hover:bg-error-container transition disabled:opacity-40"
+        >
+          Cancel
+        </button>
+      </div>
+
+      <!-- Alerts -->
+      <div id="alerts"></div>
+
+      <!-- Progress -->
+      <div class="flex items-center gap-4">
+        <div
+          class="flex-1 bg-surface-container-highest rounded-full h-3 overflow-hidden"
+        >
+          <div id="progress" class="h-3 w-0 transition-all"></div>
+        </div>
+
+        <span
+          id="status"
+          class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#4F46E5] text-white ring-1 ring-[#4F46E5]/30"
+          style=""
+          >Idle</span
+        >
+      </div>
+
+      <!-- Logs -->
+      <div
+        id="output"
+        class="bg-surface-container-lowest custom-scrollbar text-[14px] text-on-surface p-4 rounded-xl w-full h-[12.8rem] overflow-auto font-mono shadow-inner custom-scrollbar break-all"
+      ></div>
+
+      <div class="flex justify-end">
+        <button
+          id="copyOutputBtn"
+          class="text-xs uppercase tracking-wider text-primary hover:text-primary/80 transition disabled:opacity-40"
+          disabled
+        >
+          Copy Output
+        </button>
+      </div>
+    </div>
+  </section>
+</main>

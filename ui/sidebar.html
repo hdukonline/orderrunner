@@ -1,0 +1,53 @@
+<nav
+  id="side-nav"
+  class="fixed left-0 top-0 h-full flex flex-col py-8 gap-4 bg-[#1C1B1B] w-64 hidden md:flex z-[60]"
+>
+  <div class="px-8 mb-8">
+    <h1 class="text-[#C3C0FF] font-bold font-headline text-xl">Order Runner</h1>
+  </div>
+
+  <div class="flex flex-col gap-1 px-4">
+    <a
+      data-page="runner"
+      class="flex items-center gap-3 px-4 py-3 bg-[#353534] text-[#C3C0FF] border-right-2 transition-all font-['Space_Grotesk'] uppercase tracking-widest text-xs"
+      href="#"
+    >
+      <span
+        class="material-symbols-outlined"
+        style="font-variation-settings: &quot;FILL&quot; 1"
+        >play_arrow</span
+      >
+      Runner
+    </a>
+
+    <a
+      data-page="environment"
+      class="flex items-center gap-3 px-4 py-3 text-[#C7C4D8] hover:text-white hover:bg-[#2A2A2A] transition-all font-['Space_Grotesk'] uppercase tracking-widest text-xs"
+      href="#"
+    >
+      <span class="material-symbols-outlined">settings_input_component</span>
+      Environment
+    </a>
+
+    <a
+      id="clear-screenshots"
+      class="flex items-center gap-3 px-4 py-3 text-[#C7C4D8] hover:text-white hover:bg-[#2A2A2A] transition-all font-['Space_Grotesk'] uppercase tracking-widest text-xs"
+      href="#"
+    >
+      <span class="material-symbols-outlined" data-icon="delete_sweep"
+        >delete_sweep</span
+      >
+      <span class="font-medium">Clear Screenshots [0]</span>
+    </a>
+
+    <!-- Api - Add Clear basket for portal - or just have it as a hidden request -->
+  </div>
+
+  <div class="mt-auto px-8">
+    <div class="p-4 rounded-xl bg-surface-container-lowest">
+      <p class="text-[12px] text-on-surface-variant font-mono text-[#C7C4D8]">
+        v1.0.0
+      </p>
+    </div>
+  </div>
+</nav>

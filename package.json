@@ -1,0 +1,58 @@
+{
+  "name": "orderrunner",
+  "version": "1.0.0",
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./styles.css -o ./dist/ui/output.css --minify",
+    "build:render": "tsc -p tsconfig.render.json",
+    "build:main": "tsc -p tsconfig.json",
+    "copy:ui": "cpx \"ui/**/*.{html,css}\" dist/ui",
+    "build": "npm run build:css && npm run build:main && npm run build:render && npm run copy:ui",
+    "start": "npm run build && electron .",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder"
+  },
+  "build": {
+    "appId": "com.orderrunner.app",
+    "productName": "OrderRunner",
+    "directories": {
+      "output": "dist_installer"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "YOUR_GITHUB_USERNAME_OR_ORG",
+        "repo": "YOUR_REPO_NAME"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.23",
+    "concurrently": "^8.x",
+    "cpx": "^1.5.0",
+    "electron": "^26.x",
+    "electron-builder": "^26.8.1",
+    "nodemon": "^3.1.11",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.x"
+  },
+  "dependencies": {
+    "playwright": "^1.42.0",
+    "postcss-cli": "^11.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

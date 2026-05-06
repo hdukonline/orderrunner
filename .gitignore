@@ -1,0 +1,22 @@
+# Node
+node_modules/
+
+# Build output
+dist/
+dist_installer/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+
+# Playwright artifacts (optional but recommended)
+test-results/
+playwright-report/node_modules/ 
+
+notes/
