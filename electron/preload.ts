@@ -31,4 +31,6 @@ contextBridge.exposeInMainWorld('api', {
   clearScreenshots: () => ipcRenderer.invoke('clear-screenshots'),
 
   getScreenshotCount: () => ipcRenderer.invoke('get-screenshot-count'),
+
+  getAppVersion: () => ipcRenderer.invoke("get-app-version"),
 });

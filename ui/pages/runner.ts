@@ -24,6 +24,14 @@ export async function initRunnerPage() {
     const productTypeSelect = document.getElementById("product-type") as HTMLSelectElement | null;
     const runsInput = document.getElementById("runs") as HTMLInputElement;
 
+    const versionEl = document.getElementById("app-version");
+
+    if (versionEl && window.api?.getAppVersion) {
+        window.api.getAppVersion().then((version: string) => {
+            versionEl.textContent = `v${version}`;
+        });
+    }
+
     // Advance options
     const headlessCheck = document.getElementById("headless") as HTMLInputElement;
     const slowChecked = document.getElementById("test-slow") as HTMLInputElement;

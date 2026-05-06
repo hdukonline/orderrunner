@@ -65,7 +65,15 @@ ipcMain.handle('get-screenshot-count', async () => {
   }
 });
 
-
+/**
+ * ----------------------------
+ * IPC handler: get app version
+ * ----------------------------
+ * Lets renderer display current app version
+ */
+ipcMain.handle("get-app-version", () => {
+  return app.getVersion();
+});
 
 /* ------------------------------------------------------------------ */
 /* ENVIRONMENT JSON SAVE / LOAD IPC                                   */

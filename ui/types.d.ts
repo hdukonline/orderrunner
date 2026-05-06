@@ -48,6 +48,7 @@ declare global {
             openFile: (path: string) => Promise<void>;
             clearScreenshots: () => Promise<void>;
             getScreenshotCount: () => Promise<number>;
+            getAppVersion: () => Promise<string>
         };
     }
 }
