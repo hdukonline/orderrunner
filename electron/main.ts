@@ -3,6 +3,7 @@ import { ipcMain, app, BrowserWindow, screen } from "electron";
 import { runTest, RunOptions } from '../playwright/runner.js';
 import fs from "fs";
 const { clearScreenshots } = require('../ui/core/utils/screenshots');
+import { autoUpdater } from "electron-updater";
 
 /**
  * ----------------------------
@@ -150,8 +151,34 @@ app.on('browser-window-created', (_e, window) => {
  * App lifecycle
  * ----------------------------
  */
-app.whenReady().then(createWindow);
+
+app.whenReady().then(() => {
+  createWindow();
+
+  autoUpdater.checkForUpdatesAndNotify();
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
+});
+
+autoUpdater.on("checking-for-update", () => {
+  console.log("Checking for updates...");
+});
+
+autoUpdater.on("update-available", () => {
+  console.log("Update available");
+});
+
+autoUpdater.on("update-not-available", () => {
+  console.log("No updates available");
+});
+
+autoUpdater.on("error", (err) => {
+  console.error("Update error:", err);
+});
+
+autoUpdater.on("update-downloaded", () => {
+  console.log("Update downloaded. Installing...");
+  autoUpdater.quitAndInstall();
 });

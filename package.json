@@ -1,6 +1,6 @@
 {
   "name": "orderrunner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/electron/main.js",
   "scripts": {
     "build:css": "npx tailwindcss -i ./styles.css -o ./dist/ui/output.css --minify",
@@ -29,8 +29,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "YOUR_GITHUB_USERNAME_OR_ORG",
-        "repo": "YOUR_REPO_NAME"
+        "owner": "hdukonline",
+        "repo": "hdukonline"
       }
     ]
   },
@@ -48,6 +48,7 @@
     "typescript": "^5.x"
   },
   "dependencies": {
+    "electron-updater": "^6.8.3",
     "playwright": "^1.42.0",
     "postcss-cli": "^11.0.1"
   },
