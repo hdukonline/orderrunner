@@ -1,6 +1,6 @@
 {
   "name": "orderrunner",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/electron/main.js",
   "scripts": {
     "build:css": "npx tailwindcss -i ./styles.css -o ./dist/ui/output.css --minify",
@@ -24,7 +24,8 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "assets/icon.ico"
+      "icon": "assets/icon.ico",
+      "artifactName": "OrderRunner-Setup-${version}.${ext}"
     },
     "publish": [
       {
