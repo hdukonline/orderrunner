@@ -113,9 +113,6 @@ ipcMain.handle("env-load", async () => {
  * ----------------------------
  */
 function createWindow() {
-  const primaryDisplay = screen.getPrimaryDisplay();
-  const scale = primaryDisplay.scaleFactor || 1;
-
   const win = new BrowserWindow({
     minWidth: 900,
     minHeight: 860,
@@ -127,23 +124,12 @@ function createWindow() {
     },
   });
 
-
   // Hide the top menu bar (File, Edit, View etc. - you can still access it with Alt key on Windows)
   win.setAutoHideMenuBar(true);
   win.setMenuBarVisibility(false);
 
-
-
   const indexPath = path.join(app.getAppPath(), 'dist/ui/index.html');
   win.loadFile(indexPath);
-
-  /**
-   * ----------------------------
-   * Zoom-out adjustment
-   * ----------------------------
-   */
-  const zoomOutMultiplier = 1;
-  win.webContents.setZoomFactor(zoomOutMultiplier / scale);
 
   // Optional: open DevTools for debugging
   // win.webContents.openDevTools();
@@ -159,7 +145,7 @@ function createWindow() {
 app.on('browser-window-created', (_e, window) => {
   window.on('move', () => {
     const scale = screen.getDisplayMatching(window.getBounds()).scaleFactor;
-    const zoomOutMultiplier = 1; // <-- SAME VALUE HERE FOR CONSISTENCY
+    const zoomOutMultiplier = 1;
     window.webContents.setZoomFactor(zoomOutMultiplier / scale);
   });
 });
@@ -172,11 +158,18 @@ app.on('browser-window-created', (_e, window) => {
 app.whenReady().then(() => {
   const win = createWindow();
 
-  win.webContents.on("did-finish-load", () => {
+  win.once("ready-to-show", () => {
+    win.show();
+
+    const scale = screen.getDisplayMatching(win.getBounds()).scaleFactor;
+    win.webContents.setZoomFactor(1 / scale);
+
+    win.setBounds(win.getBounds());
+
     autoUpdater.checkForUpdatesAndNotify();
   });
-});
 
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
