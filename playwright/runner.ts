@@ -1,4 +1,4 @@
-import { chromium, firefox, webkit, Browser, Page } from "playwright";
+import { chromium, firefox, webkit, Browser, Page } from "playwright-core";
 import { tests } from "./tests";
 import { TestDefinition } from "./types";
 import { withTimeout } from "./timeoutHelper";

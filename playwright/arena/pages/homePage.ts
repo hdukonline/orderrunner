@@ -1,4 +1,4 @@
-import { Page } from "playwright";
+import { Page } from "playwright-core";
 import { waitForVisible } from "../helpers/waitForPage";
 
 export class HomePage {

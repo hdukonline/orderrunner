@@ -1,4 +1,4 @@
-import { Locator } from "playwright";
+import { Locator } from "playwright-core";
 
 export async function waitForVisible(
     locator: Locator,

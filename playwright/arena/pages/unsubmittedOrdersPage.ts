@@ -1,4 +1,4 @@
-import { Page } from "playwright";
+import { Page } from "playwright-core";
 import { waitForVisible, waitForVisibleNormalized } from "../helpers/waitForPage";
 
 export class UnsubmittedOrdersPage {

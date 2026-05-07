@@ -1,4 +1,4 @@
-import { Page } from "playwright";
+import { Page } from "playwright-core";
 import { waitForVisibleNormalized } from "../helpers/waitForPage";
 
 export class OrderSummaryPage {

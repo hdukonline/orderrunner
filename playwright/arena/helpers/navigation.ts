@@ -1,4 +1,4 @@
-import { Locator, Page } from "playwright";
+import { Locator, Page } from "playwright-core";
 import { assertPageReady } from "./assertPageReady";
 
 export async function gotoWithRetry(

@@ -1,5 +1,13 @@
 import path from "path";
 import { ipcMain, app, BrowserWindow, screen } from "electron";
+
+if (process.resourcesPath) {
+  process.env.PLAYWRIGHT_BROWSERS_PATH = path.join(
+    process.resourcesPath,
+    'playwright-browsers'
+  );
+}
+
 import { runTest, RunOptions } from '../playwright/runner.js';
 import fs from "fs";
 const { clearScreenshots } = require('../ui/core/utils/screenshots');

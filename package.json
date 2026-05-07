@@ -1,6 +1,6 @@
 {
   "name": "orderrunner",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "main": "dist/electron/main.js",
   "scripts": {
     "build:css": "npx tailwindcss -i ./styles.css -o ./dist/ui/output.css --minify",
@@ -9,8 +9,9 @@
     "copy:ui": "cpx \"ui/**/*.{html,css}\" dist/ui",
     "build": "npm run build:css && npm run build:main && npm run build:render && npm run copy:ui",
     "start": "npm run build && electron .",
-    "pack": "npm run build && electron-builder --dir",
-    "dist": "npm run build && electron-builder"
+    "install:browsers": "set PLAYWRIGHT_BROWSERS_PATH=0&& npx playwright install chromium firefox webkit",
+    "pack": "npm run build && npm run install:browsers && electron-builder --dir",
+    "dist": "npm run build && npm run install:browsers && electron-builder"
   },
   "build": {
     "appId": "com.orderrunner.app",
@@ -18,8 +19,15 @@
     "directories": {
       "output": "dist_installer"
     },
+    "extraResources": [
+      {
+        "from": "node_modules/playwright-core/.local-browsers",
+        "to": "playwright-browsers"
+      }
+    ],
     "files": [
       "dist/**/*",
+      "node_modules/playwright-core/**/*",
       "package.json"
     ],
     "win": {
@@ -36,7 +44,6 @@
     ]
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.1",
     "@tailwindcss/postcss": "^4.1.18",
     "autoprefixer": "^10.4.23",
     "concurrently": "^8.x",
@@ -44,13 +51,15 @@
     "electron": "^26.x",
     "electron-builder": "^26.8.1",
     "nodemon": "^3.1.11",
+    "playwright": "^1.59.1",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.x"
   },
   "dependencies": {
     "electron-updater": "^6.8.3",
-    "playwright": "^1.42.0",
+    "@playwright/test": "^1.58.1",
+    "playwright-core": "^1.x.x",
     "postcss-cli": "^11.0.1"
   },
   "keywords": [],

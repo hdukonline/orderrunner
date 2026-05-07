@@ -1,4 +1,4 @@
-import { Page } from "playwright";
+import { Page } from "playwright-core";
 import { waitForVisible, waitForVisibleNormalized } from "../helpers/waitForPage";
 import { OrderSummaryPage } from "./orderSummaryPage";
 import { UnsubmittedOrdersPage } from "./unsubmittedOrdersPage";
